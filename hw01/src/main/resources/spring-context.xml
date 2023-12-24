@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns="http://www.springframework.org/schema/beans"
-       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd">
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="ioService" class="ru.otus.hw.service.StreamsIOService">
-        <constructor-arg index="0">
-            <util:constant static-field="java.lang.System.out"/>
-        </constructor-arg>
+    <context:property-placeholder location="classpath:application.properties" />
+
+    <bean id="appConfig" class="ru.otus.spring.hw.config.AppProperties">
+        <constructor-arg name="testFileName" value="${service.testFileName}"/>
+    </bean>
+
+    <bean id="fileService" class="ru.otus.spring.hw.service.FileServiceImpl" />
+
+    <bean id="mapper" class="ru.otus.spring.hw.mapper.Mapper" />
+
+    <bean id="ioService" class="ru.otus.spring.hw.service.StreamsIOService">
+        <constructor-arg name="printStream" type="java.io.PrintStream" value="#{T(System).out}"/>
+    </bean>
+
+    <bean id="testService" class="ru.otus.spring.hw.service.TestServiceImpl">
+        <constructor-arg name="ioService" type="ru.otus.spring.hw.service.IOService" ref="ioService"/>
+        <constructor-arg name="questionDao" type="ru.otus.spring.hw.dao.QuestionDao" ref="questionDao"/>
+    </bean>
+
+    <bean id="testRunnerService" class="ru.otus.spring.hw.service.TestRunnerServiceImpl">
+        <constructor-arg name="testService" type="ru.otus.spring.hw.service.TestService" ref="testService"/>
+    </bean>
+
+    <bean id="questionDao" class="ru.otus.spring.hw.dao.CsvQuestionDao">
+        <constructor-arg name="fileService" type="ru.otus.spring.hw.service.FileService" ref="fileService"/>
+        <constructor-arg name="fileNameProvider" type="ru.otus.spring.hw.config.TestFileNameProvider" ref="appConfig"/>
+        <constructor-arg name="mapper" type="ru.otus.spring.hw.mapper.Mapper" ref="mapper"/>
     </bean>
 
 </beans>
