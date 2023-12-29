@@ -1,7 +1,8 @@
-package ru.otus.hw.dao.dto;
+package ru.otus.spring.hw.dao.dto;
+
 
 import com.opencsv.bean.AbstractCsvConverter;
-import ru.otus.hw.domain.Answer;
+import ru.otus.spring.hw.domain.Answer;
 
 public class AnswerCsvConverter extends AbstractCsvConverter {
 

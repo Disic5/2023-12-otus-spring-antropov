@@ -1,4 +1,4 @@
-package ru.otus.hw.service;
+package ru.otus.spring.hw.service;
 
 public interface IOService {
     void printLine(String s);

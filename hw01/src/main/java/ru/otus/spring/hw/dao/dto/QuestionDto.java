@@ -1,10 +1,9 @@
-package ru.otus.hw.dao.dto;
+package ru.otus.spring.hw.dao.dto;
 
 import com.opencsv.bean.CsvBindAndSplitByPosition;
 import com.opencsv.bean.CsvBindByPosition;
 import lombok.Data;
-import ru.otus.hw.domain.Answer;
-import ru.otus.hw.domain.Question;
+import ru.otus.spring.hw.domain.Answer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +17,4 @@ public class QuestionDto {
     @CsvBindAndSplitByPosition(position = 1, collectionType = ArrayList.class, elementType = Answer.class,
             converter = AnswerCsvConverter.class, splitOn = "\\|")
     private List<Answer> answers;
-
-    public Question toDomainObject() {
-        return new Question(text, answers);
-    }
 }
