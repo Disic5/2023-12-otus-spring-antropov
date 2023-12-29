@@ -9,10 +9,10 @@
     </modules>
 
     <groupId>ru.otus</groupId>
-    <artifactId>OTUS</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>otus</artifactId>
+    <version>1.0</version>
     <packaging>pom</packaging>
-    <name>OTUS</name>
+    <name>otus</name>
 
     <properties>
         <maven.compiler.target>17</maven.compiler.target>

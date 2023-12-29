@@ -11,8 +11,6 @@
         <constructor-arg name="testFileName" value="${service.testFileName}"/>
     </bean>
 
-    <bean id="fileService" class="ru.otus.spring.hw.service.FileServiceImpl" />
-
     <bean id="mapper" class="ru.otus.spring.hw.mapper.Mapper" />
 
     <bean id="ioService" class="ru.otus.spring.hw.service.StreamsIOService">
@@ -29,7 +27,6 @@
     </bean>
 
     <bean id="questionDao" class="ru.otus.spring.hw.dao.CsvQuestionDao">
-        <constructor-arg name="fileService" type="ru.otus.spring.hw.service.FileService" ref="fileService"/>
         <constructor-arg name="fileNameProvider" type="ru.otus.spring.hw.config.TestFileNameProvider" ref="appConfig"/>
         <constructor-arg name="mapper" type="ru.otus.spring.hw.mapper.Mapper" ref="mapper"/>
     </bean>
